@@ -1,59 +1,39 @@
-import csv, re
+import csv
 
+def labelling( status ):
+	labels = ['not a real question', 'not constructive', 'off topic', 'open', 'too localized']
+	label = labels.index( status ) + 1
+	return label
 
-def get_words( text ):
-	# Preprocesses the text and converts them to lower case words.
-	text = text.replace( "'", "" )
-	text = re.sub( r'\W+', ' ', text )
-	text = text.lower()
-	
-	text = text.split()
-	words = []
-	for w in text:
-		if w in words:
-			continue
-		words.append( w )
+def get_data(clean_csv_file):
+	reader = csv.reader( open( input_file ) )
+	return reader
+
+def get_closed(clean_csv_file, labels=[], first=-1):
+	data = get_data(clean_csv_file)
+	results = []
+	if len(labels) is 0:
+		for index, each_row in enumerate(data):
+			if each_row[1] != 4:
+				results.append(each_row)
+			if first != -1 and index >= first:
+				break
+	if len(labels):
+		selected = [labelling(label) for label in labels]
+		for index, each_row in enumerate(data):
+			if each_row[1] in selected:
+				results.append(each_row)
+			if first != -1 and index >= first:
+				break
 		
-	words = " ".join( words )
-	return words
+	return results
 
-def process_tags( tag ):
-	# Removes the shit out of tags and makes them lower case.
-	tag = re.sub( r'\W+', '', tag )
-	tag = tag.lower()
-	return tag
-
-
-input_file = '../data/train_sample.csv'
-output_file = 'output.csv'
-
-reader = csv.reader( open( input_file ) )
-writer = csv.writer( open( output_file, 'wb') )
-
-
-# Ignoring headers in the data files
-headers = reader.next()
-
-for index, row in enumerate(reader):
-	# uncomment the next line to see if it works and then CTRL-C
-	# print index, row
-
-	post_id = row[0]
-	try:
-		post_status = row[14]
-	except IndexError:
-		post_status = 0
-
-	reputation = row[4]
-	good_posts = row[5]
-
-	title = get_words( row[6] )
-	body = get_words( row[7] )
-	tags = row[8:13]
-	tags = list( set( map( process_tags, tags ) ) )
-
-	writer.writerow( [ post_id, post_status, reputation, good_posts, title] + tags + [ body ] )
-
-	# Uncomment the next 2 lines if you don't want to know shit !
-	if not index % 1000 :
-		print index, [ post_id, post_status, reputation, good_posts, title] + tags + [ body ]
+def get_closed(clean_csv_file, first=-1):
+	data = get_data(clean_csv_file)
+	results = []
+	if len(labels) is 0:
+		for index, each_row in enumerate(data):
+			if each_row[1] == 4:
+				results.append(each_row)
+			if first != -1 and index >= first:
+				break
