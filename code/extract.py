@@ -31,7 +31,7 @@ def process_label( status ):
 
 
 input_file = '../data/train_sample.csv'
-output_file = 'output.csv'
+output_file = 'clean_input.csv'
 
 reader = csv.reader( open( input_file ) )
 writer = csv.writer( open( output_file, 'wb') )
@@ -47,7 +47,7 @@ for index, row in enumerate(reader):
 	post_id = row[0]
 	try:
 		post_status = row[14]
-		post_status = process_labes( post_status )
+		post_status = process_label( post_status )
 	except IndexError:
 		post_status = 0
 
