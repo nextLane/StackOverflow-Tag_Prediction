@@ -52,7 +52,7 @@ def get_total_count(clean_csv_file):
 	reader = get_reader(clean_csv_file)
 	return len([row for row in reader])
 
-# reader = get_reader('clean_input.csv')
+"""
 a = get_closed_count(input_file)
 b = get_open_count(input_file)
 c = get_total_count(input_file)
@@ -60,3 +60,4 @@ print 'CLOSED', a
 print 'OPEN', b
 print 'TOTAL', c
 print 'SURE?', a+b == c
+"""
