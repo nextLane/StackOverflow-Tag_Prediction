@@ -1,1 +1,25 @@
-We'll write this later. Procrastination kicks in :P
+I think we are done with benchmarking. Will see the accuracy of the model later but this is our sexy output.
+
+```
+open 922432
+open 7437522
+not a real question 10271836
+not a real question 11557015
+open 2587076
+open 10327288
+not a real question 7463465
+open 7206901
+open 11484560
+open 8412415
+not a real question 10428227
+open 9597659
+open 9066727
+open 11198998
+not constructive 583245
+off topic 10373769
+open 6993413
+open 9970707
+off topic 9146894
+open 324334
+open 9663573
+```
