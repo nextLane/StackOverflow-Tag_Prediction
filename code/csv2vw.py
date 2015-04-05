@@ -1,7 +1,7 @@
 import sys, csv, re
 
-input_file = 'clean_input.csv'
-output_file = 'vw_format.vw'
+input_file = sys.argv[1]
+output_file = sys.argv[2]
 
 reader = csv.reader( open( input_file ))
 o = open( output_file, 'wb' )
